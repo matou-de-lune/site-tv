@@ -2,16 +2,16 @@
 FROM node:16-alpine
 
 # Устанавливаем рабочую директорию
-WORKDIR /core
+WORKDIR /app
 
 # Копируем package.json и package-lock.json
-COPY package*.json ./
+COPY ./core/package*.json ./
 
 # Устанавливаем зависимости
 RUN npm install
 
 # Копируем остальную часть приложения
-COPY . .
+COPY ./core ./
 
 # Собираем приложение
 RUN npm run build
