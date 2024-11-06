@@ -30,20 +30,34 @@ jobs:
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/your-repo-name:latest
       
-      - name: Add server to known_hosts
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts    
+      # - name: Add server to known_hosts
+      #   run: |
+      #     mkdir -p ~/.ssh
+      #     echo "${{ secrets.KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+      #     chmod 600 ~/.ssh/known_hosts    
 
-      - name: SSH Deploy to Server
-        uses: garygrossgarten/github-action-ssh@v0.6.3
+      # - name: SSH Deploy to Server
+      #   uses: garygrossgarten/github-action-ssh@v0.6.3
+      #   with:
+      #     command: |
+      #       docker pull ghcr.io/${{ github.repository_owner }}/your-repo-name:latest
+      #       docker stop your-container-name || true
+      #       docker rm your-container-name || true
+      #       docker run -d --name your-container-name -p 3000:3000 ghcr.io/${{ github.repository_owner }}/your-repo-name:latest
+      #     host: ${{ secrets.SERVER_HOST }}
+      #     username: ${{ secrets.SERVER_USER }}
+      #     privateKey: ${{ secrets.SERVER_SSH_KEY }}
+
+      - name: SSH Command
+        uses: D3rHase/ssh-command-action@v0.2.2
         with:
+            # hostname / IP of the server
+          host: ${{ secrets.SERVER_HOST }}
+          user: ${{ secrets.SERVER_USER }}
+          private_key: ${{ secrets.SERVER_SSH_KEY }}
+          host_fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           command: |
             docker pull ghcr.io/${{ github.repository_owner }}/your-repo-name:latest
             docker stop your-container-name || true
             docker rm your-container-name || true
             docker run -d --name your-container-name -p 3000:3000 ghcr.io/${{ github.repository_owner }}/your-repo-name:latest
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          privateKey: ${{ secrets.SERVER_SSH_KEY }}
