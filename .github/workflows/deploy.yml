@@ -67,6 +67,8 @@ jobs:
           args: IMAGE_NAME
           command: |
             docker pull ghcr.io/matou-de-lune/your-repo-name:latest
-            docker stop your-container-name || true
-            docker rm your-container-name || true
-            docker run -d --name your-container-name -p 3000:3000 $IMAGE_NAME
+            
+
+# docker stop your-container-name || true
+#             docker rm your-container-name || true
+#             docker run -d --name your-container-name -p 3000:3000 $IMAGE_NAME            
