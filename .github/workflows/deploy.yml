@@ -59,13 +59,14 @@ jobs:
         uses: D3rHase/ssh-command-action@v0.2.2
         with:
             # hostname / IP of the server
+            # docker pull env.IMAGE_NAME
           host: ${{ secrets.SERVER_HOST }}
           user: ${{ secrets.SERVER_USER }}
           private_key: ${{ secrets.SERVER_SSH_KEY }}
           host_fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           args: IMAGE_NAME
           command: |
-            docker pull env.IMAGE_NAME
+            docker pull ghcr.io/matou-de-lune/your-repo-name:latest
             docker stop your-container-name || true
             docker rm your-container-name || true
             docker run -d --name your-container-name -p 3000:3000 $IMAGE_NAME
