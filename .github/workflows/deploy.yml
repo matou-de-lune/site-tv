@@ -53,11 +53,12 @@ jobs:
       #       echo $CR_PAT | docker login ghcr.io -u matou-de-lune --password-stdin
 
       - name: Authenticate and Pull Docker Image on Remote Server
-        uses: appleboy/ssh-action@v0.1.2
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
+          fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           port: 22
           envs: IMAGE_NAME, GHCR_TOKEN=${{ secrets.GHCR_TOKEN }}
           script: |
