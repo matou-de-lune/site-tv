@@ -51,10 +51,11 @@ jobs:
           args: IMAGE_NAME, CR_PAT
           command: |
             echo CR_PAT | docker login ghcr.io -u matou-de-lune --password-stdin
-            docker pull ghcr.io/matou-de-lune/your-repo-name:latest
+
             
 
 # docker stop your-container-name || true
 #             docker rm your-container-name || true
 #             docker run -d --name your-container-name -p 3000:3000 $IMAGE_NAME            
             # echo $CR_PAT | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+                        # docker pull ghcr.io/matou-de-lune/your-repo-name:latest
