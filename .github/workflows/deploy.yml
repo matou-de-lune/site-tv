@@ -50,7 +50,7 @@ jobs:
           host_fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           args: IMAGE_NAME, CR_PAT
           command: |
-            echo CR_PAT | docker login ghcr.io -u matou-de-lune --password-stdin
+            echo $CR_PAT | docker login ghcr.io -u matou-de-lune --password-stdin
 
             
 
