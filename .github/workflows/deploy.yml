@@ -39,18 +39,33 @@ jobs:
         run: |
           echo "Image name $IMAGE_NAME"
 
-      - name: SSH Command
-        uses: D3rHase/ssh-command-action@v0.2.2
+      # - name: SSH Command
+      #   uses: D3rHase/ssh-command-action@v0.2.2
+      #   with:
+      #       # hostname / IP of the server
+      #       # docker pull env.IMAGE_NAME
+      #     host: ${{ secrets.SERVER_HOST }}
+      #     user: ${{ secrets.SERVER_USER }}
+      #     private_key: ${{ secrets.SERVER_SSH_KEY }}
+      #     host_fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+      #     args: IMAGE_NAME, CR_PAT
+      #     command: |
+      #       echo $CR_PAT | docker login ghcr.io -u matou-de-lune --password-stdin
+
+      - name: Authenticate and Pull Docker Image on Remote Server
+        uses: appleboy/ssh-action@v0.1.2
         with:
-            # hostname / IP of the server
-            # docker pull env.IMAGE_NAME
           host: ${{ secrets.SERVER_HOST }}
-          user: ${{ secrets.SERVER_USER }}
-          private_key: ${{ secrets.SERVER_SSH_KEY }}
-          host_fingerprint: ${{ secrets.SSH_FINGERPRINT }}
-          args: IMAGE_NAME, CR_PAT
-          command: |
-            echo $CR_PAT | docker login ghcr.io -u matou-de-lune --password-stdin
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: 22
+          envs: IMAGE_NAME, GHCR_TOKEN=${{ secrets.GHCR_TOKEN }}
+          script: |
+            echo $GHCR_TOKEN | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            docker pull $IMAGE_NAME
+            docker stop your-container-name || true
+            docker rm your-container-name || true
+            docker run -d --name your-container-name -p 3000:3000 $IMAGE_NAME      
 
             
 
