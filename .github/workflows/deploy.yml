@@ -58,6 +58,7 @@ jobs:
           host_fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           command: |
             IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/your-repo-name:latest
+            echo "Image name: $IMAGE_NAME"
             docker pull $IMAGE_NAME
             docker stop your-container-name || true
             docker rm your-container-name || true
