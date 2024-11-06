@@ -63,7 +63,7 @@ jobs:
           user: ${{ secrets.SERVER_USER }}
           private_key: ${{ secrets.SERVER_SSH_KEY }}
           host_fingerprint: ${{ secrets.SSH_FINGERPRINT }}
-          envs: IMAGE_NAME
+          args: IMAGE_NAME
           command: |
             docker pull $IMAGE_NAME
             docker stop your-container-name || true
