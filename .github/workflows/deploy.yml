@@ -65,7 +65,7 @@ jobs:
           host_fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           args: IMAGE_NAME
           command: |
-            docker pull $IMAGE_NAME
+            docker pull env.IMAGE_NAME
             docker stop your-container-name || true
             docker rm your-container-name || true
             docker run -d --name your-container-name -p 3000:3000 $IMAGE_NAME
