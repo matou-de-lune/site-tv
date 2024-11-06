@@ -50,7 +50,7 @@ jobs:
           host_fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           args: IMAGE_NAME, CR_PAT
           command: |
-            echo "QQ $CR_PAT"
+            echo 'QQ'
             echo $CR_PAT | docker login ghcr.io -u matou-de-lune --password-stdin
             docker pull ghcr.io/matou-de-lune/your-repo-name:latest
             
