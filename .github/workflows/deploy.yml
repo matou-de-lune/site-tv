@@ -29,6 +29,10 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/your-repo-name:latest
+      
+      - name: Add server to known_hosts
+        run: |
+          echo "${{ secrets.KNOWN_HOSTS }}" >> ~/.ssh/known_hosts    
 
       - name: SSH Deploy to Server
         uses: garygrossgarten/github-action-ssh@v0.6.3
