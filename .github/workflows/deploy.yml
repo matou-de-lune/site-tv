@@ -62,9 +62,7 @@ jobs:
           private_key: ${{ secrets.SERVER_SSH_KEY }}
           host_fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           command: |
-            IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/your-repo-name:latest
-            echo "Image name: $IMAGE_NAME"
             docker pull $IMAGE_NAME
             docker stop your-container-name || true
             docker rm your-container-name || true
-            docker run -d --name your-container-name -p 3000:3000 ghcr.io/${{ github.repository_owner }}/your-repo-name:latest
+            docker run -d --name your-container-name -p 3000:3000 $IMAGE_NAME
