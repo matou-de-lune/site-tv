@@ -64,8 +64,10 @@ jobs:
           user: ${{ secrets.SERVER_USER }}
           private_key: ${{ secrets.SERVER_SSH_KEY }}
           host_fingerprint: ${{ secrets.SSH_FINGERPRINT }}
-          args: IMAGE_NAME
+          args: IMAGE_NAME, CR_PAT=${{ secrets.CR_PAT }}
           command: |
+            echo "huli"
+            echo $CR_PAT | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             docker pull ghcr.io/matou-de-lune/your-repo-name:latest
             
 
