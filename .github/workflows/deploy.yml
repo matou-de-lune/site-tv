@@ -54,14 +54,11 @@ jobs:
 
 # cat ~/cod.txt | docker login ghcr.io -u ${{ github.actor }} --password-stdin;      
 
-      - name: Authenticate with GitHub CLI
+      - name: Authenticate and Delete Docker package from GitHub Container Registry
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAT_TOKEN: ${{ secrets.CR_PAT }}
         run: |
-          echo $GITHUB_TOKEN | gh auth login --with-token
-
-      - name: Delete Docker package from GitHub Container Registry
-        run: |
+          echo $PAT_TOKEN | gh auth login --with-token
           gh api \
             -X DELETE \
             -H "Accept: application/vnd.github+json" \
