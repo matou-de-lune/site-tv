@@ -55,13 +55,11 @@ jobs:
 # cat ~/cod.txt | docker login ghcr.io -u ${{ github.actor }} --password-stdin;      
 
       - name: Authenticate and Delete Docker package from GitHub Container Registry1
-        uses: shaneapowell/ghaction-package-admin@v0
+        uses: chipkent/action-cleanup-package@v1.0.1
         with:
-          ghtoken: ${{ github.CR_PAT }}
-          operation: deletePackageVersions
-          user: ${{ github.repository_owner }}
-          package_type: docker
-          package_name: your-repo-name
+          package-name: ghcr.io/${{ github.repository_owner }}/your-repo-name #${{ github.event.repository.name }}
+          tag: ghcr.io/${{ github.repository_owner }}/your-repo-name:latest
+          github-token: ${{ secrets.CR_PAT }}
 
       # - name: Authenticate and Pull Docker Image on RemoteServer
       #   uses: appleboy/ssh-action@v1.0.3
