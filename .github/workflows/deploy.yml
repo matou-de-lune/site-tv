@@ -57,10 +57,8 @@ jobs:
       - name: Authenticate and Delete Docker package from GitHub Container Registry1
         uses: actions/delete-package-versions@v5
         with:
-          owner: 'github'
           package-name: 'your-repo-name'
           package-type: 'docker'
-          token: ${{ secrets.CR_PAT }}
           min-versions-to-keep: 1
 
       # - name: Authenticate and Pull Docker Image on RemoteServer
