@@ -58,8 +58,10 @@ jobs:
         uses: actions/delete-package-versions@v5
         with:
           package-name: 'your-repo-name'
-          package-type: 'docker'
-          min-versions-to-keep: 2
+          package-type: 'container'
+          delete-only-untagged-versions: 'false'
+          min-versions-to-keep: 1
+          token: ${{ secrets.CR_PAT }}
 
       # - name: Authenticate and Pull Docker Image on RemoteServer
       #   uses: appleboy/ssh-action@v1.0.3
