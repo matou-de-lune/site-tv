@@ -54,7 +54,7 @@ jobs:
 
 # cat ~/cod.txt | docker login ghcr.io -u ${{ github.actor }} --password-stdin;      
 
-      - name: Authenticate and Delete Docker package from GitHub Container Registry
+      - name: Authenticate and Delete Docker package from GitHub Container Registry1
         env:
           PAT_TOKEN: ${{ secrets.CR_PAT }}
         run: |
