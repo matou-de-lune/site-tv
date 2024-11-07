@@ -57,7 +57,7 @@ jobs:
       - name: Authenticate and Delete Docker package from GitHub Container Registry1
         uses: chipkent/action-cleanup-package@v1.0.1
         with:
-          package-name: ghcr.io/${{ github.repository_owner }}/your-repo-name #${{ github.event.repository.name }}
+          package-name: your-repo-name #${{ github.event.repository.name }}
           tag: ghcr.io/${{ github.repository_owner }}/your-repo-name:latest
           github-token: ${{ secrets.CR_PAT }}
 
