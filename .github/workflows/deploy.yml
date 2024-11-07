@@ -52,7 +52,7 @@ jobs:
           host_fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           args: IMAGE_NAME, CR_PAT
           command: |
-            echo '{\"auths\":{\"ghcr.io\":{\"auth\":\"$(echo -n \"${{ github.actor }}:$CR_PAT\" | base64)\"}}}' > ~/.docker/config.json
+            mkdir -p ~/.docker && echo '{\"auths\":{\"ghcr.io\":{\"auth\":\"$(echo -n \"${{ github.actor }}:$CR_PAT\" | base64)\"}}}' > ~/.docker/config.json
 
       # - name: Authenticate and Pull Docker Image on RemoteServer
       #   uses: appleboy/ssh-action@v1.0.3
