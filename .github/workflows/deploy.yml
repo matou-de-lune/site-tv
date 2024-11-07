@@ -39,7 +39,7 @@ jobs:
         run: |
           echo "Image name $IMAGE_NAME"
 
-      - name: SSH Command
+      - name: SSH Command1
         uses: D3rHase/ssh-command-action@v0.2.2
         with:
             # hostname / IP of the server
