@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Remove untagged container images
-        uses: actions/delete-package-versions@v4.1.1
+        uses: actions/delete-package-versions@v5
         with:
           package-name: 'your-repo-name'
           package-type: 'container'
           delete-only-untagged-versions: 'false'
-          min-versions-to-keep: 1
+          min-versions-to-keep: 0
           token: ${{ secrets.CR_PAT }}
